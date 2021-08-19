@@ -1,4 +1,5 @@
 let display = document.querySelector('#display')
+let displayTwo = document.querySelector('#displayTwo')
 let numberBtns = document.querySelectorAll('[data-number]')
 let operandBtns = document.querySelectorAll('[data-operand]')
 let clearBtn = document.querySelector('#clear')
@@ -9,6 +10,7 @@ let operandVal
 numberBtns.forEach((x) => {
     x.addEventListener('click', function(e) {
         display.innerText += e.target.innerText
+        displayTwo.innerText += e.target.innerText
     })
 })
 
@@ -17,12 +19,16 @@ operandBtns.forEach((x) => {
         previousVal = display.innerText
         operandVal = e.target.innerText
         display.innerText = ''
+        displayTwo.innerText = `${previousVal}${operandVal}`
 
     })
 })
 
 clearBtn.addEventListener('click', function() {
     display.innerText = ''
+    displayTwo.innerText = ''
+    currentVal = ''
+    previousVal = ''
 })
 
 equalsBtn.addEventListener('click', operation)
@@ -55,7 +61,7 @@ function operation(a, operand, b) {
         case '-':
             display.innerText = subtract(a,b)
             break
-        case 'X':
+        case 'x':
             display.innerText = multiply(a,b)
             break
         case '/':
